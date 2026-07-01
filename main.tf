@@ -8,6 +8,11 @@ resource "google_compute_subnetwork" "custom_subnet" {
   ip_cidr_range = "10.10.0.0/16"
   region        = var.region
   network       = google_compute_network.vpc_network.id
+
+  secondary_ip_range {
+    range_name    = "pods"
+    ip_cidr_range = "192.168.0.0/16"
+  }
 }
 
 resource "google_compute_firewall" "allow_internal" {
@@ -70,7 +75,9 @@ resource "google_container_cluster" "primary" {
   deletion_protection      = false
   remove_default_node_pool = true
 
-
+  ip_allocation_policy {
+    cluster_secondary_range_name = "pods"
+  }
 }
 
 
