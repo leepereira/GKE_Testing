@@ -50,8 +50,15 @@ resource "google_compute_firewall" "allow_gke" {
   source_ranges = ["0.0.0.0/0"]
 }
 
+resource "google_project_service" "container" {
+  project            = var.project_id
+  service            = "container.googleapis.com"
+  disable_on_destroy = false
+}
+
 #GKE Cluster
 resource "google_container_cluster" "primary" {
+  depends_on         = [google_project_service.container]
   project            = var.project_id
   name               = "gke-cluster"
   location           = var.zone # region for control plane
