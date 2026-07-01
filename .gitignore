@@ -1,0 +1,10 @@
+# Sensitive credentials - never commit
+keys.json
+*.json
+
+# Terraform generated files
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
