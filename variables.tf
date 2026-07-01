@@ -39,7 +39,7 @@ variable "backend_prefix" {
 variable "K8s_version" {
   description = "The version of the GKE master to use."
   type        = string
-  default     = "1.26.9-gke.1000"
+  default     = "1.35.5-gke.1163012"
 }
 
 
